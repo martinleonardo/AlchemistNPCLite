@@ -1,4 +1,5 @@
 using System.Linq;
+using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -16,6 +17,7 @@ namespace AlchemistNPCLite.NPCs
     {
         public static bool baseShop = false;
         public static bool plantShop = false;
+        private Mod ThoriumMod;
         public override string Texture
         {
             get
@@ -403,27 +405,26 @@ namespace AlchemistNPCLite.NPCs
                     return EntryA14;
                 }
             }
-            if (ModLoader.GetMod("ThoriumMod") != null)
-            {
-                int DA = NPC.FindFirstNPC(ModLoader.GetMod("ThoriumMod").NPCType("DesertTraveler"));
-                if (DA >= 0 && Main.rand.Next(7) == 0)
-                {
-                    return EntryA9 + Main.npc[DA].GivenName + EntryA10;
-                }
-            }
-            if (ModLoader.GetMod("ThoriumMod") != null)
-            {
-                int DA = NPC.FindFirstNPC(ModLoader.GetMod("ThoriumMod").NPCType("DesertTraveler"));
-                if (DA >= 0 && Brewer >= 0 && Main.rand.Next(8) == 0)
-                {
-                    return EntryA11;
-                }
-            }
-            if (ModLoader.GetMod("ThoriumMod") != null && Main.rand.Next(5) == 0)
-            {
-                return EntryA8;
-            }
 			*/
+            ModLoader.TryGetMod("ThoriumMod", out ThoriumMod);
+
+            if (ThoriumMod != null)
+            {
+                if (ThoriumMod.TryFind<ModNPC>("DesertTraveler", out var desertTraveler)) {
+                    int DA = NPC.FindFirstNPC(desertTraveler.Type);
+                    if (DA >= 0 && Main.rand.Next(7) == 0)
+                    {
+                        return EntryA9 + Main.npc[DA].GivenName + EntryA10;
+                    }
+                    if (DA >= 0 && Brewer >= 0 && Main.rand.Next(8) == 0)
+                    {
+                        return EntryA11;
+                    }
+                }
+                if (Main.rand.Next(5) == 0) {
+                    return EntryA8;
+                }
+            }
             switch (Main.rand.Next(7))
             {
                 case 0:
@@ -632,9 +633,8 @@ namespace AlchemistNPCLite.NPCs
                     shop.item[nextSlot].shopCustomPrice = 1000;
                     nextSlot++;
                 }
-				// IMPLEMENT WHEN WEAKREFERENCES FIXED
-				/*
-                if (ModLoader.GetMod("ThoriumMod") != null)
+                ModLoader.TryGetMod("ThoriumMod", out ThoriumMod);
+                if (ThoriumMod != null)
                 {
                 	if (NPC.downedBoss2)
                 	{
@@ -645,7 +645,6 @@ namespace AlchemistNPCLite.NPCs
                 		addModItemToShop(ThoriumMod, "Jelly", 7500, ref shop, ref nextSlot);
                 	}
                 }
-				*/
                 if (Main.hardMode)
                 {
                     shop.item[nextSlot].SetDefaults(ItemID.PixieDust);
@@ -720,6 +719,13 @@ namespace AlchemistNPCLite.NPCs
                 	}	
                 }
 				*/
+            }
+        }
+        private void addModItemToShop(Mod mod, String itemName, int price, ref Chest shop, ref int nextSlot) {
+            if(mod.TryFind<ModItem>(itemName, out ModItem currItem)) {
+                shop.item[nextSlot].SetDefaults(currItem.Type);
+                shop.item[nextSlot].shopCustomPrice = price;
+                nextSlot++;
             }
         }
     }

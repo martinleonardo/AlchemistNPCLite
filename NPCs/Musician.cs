@@ -20,6 +20,7 @@ namespace AlchemistNPCLite.NPCs
         public static bool S1 = true;
         public static bool S2 = false;
         public static bool S3 = false;
+        private Mod ThoriumMod;
         public override string Texture
         {
             get
@@ -354,16 +355,14 @@ namespace AlchemistNPCLite.NPCs
             {
                 return EntryM12 + Main.npc[Clothier].GivenName + EntryM13;
             }
-            // IMPLEMENT WHEN WEAKREFERENCES FIXED
-            /*
-            if (ModLoader.GetMod("ThoriumMod") != null)
+            ModLoader.TryGetMod("ThoriumMod", out ThoriumMod);
+            if (ThoriumMod != null)
             {
             	if (Main.rand.Next(15) == 0)
             	{
             	    return EntryM18;
             	}
             }
-            */
             if (ModLoader.TryGetMod("CalamityModMusic", out Mod CalamityMusic))
             {
             	if (Main.rand.Next(15) == 0)
@@ -430,29 +429,27 @@ namespace AlchemistNPCLite.NPCs
             }
         }
 
-        // IMPLEMENT WHEN WEAKREFERENCES FIXED
-        /*
+        // CHECK THORIUM MOD CALLS
         public bool ThoriumModDownedGTBird
         {
-            get { return ThoriumMod.ThoriumWorld.downedThunderBird; }
+            get { return (bool) ThoriumMod.Call("GetDownedBoss", "TheGrandThunderBird"); }
         }
         public bool ThoriumModDownedViscount
         {
-            get { return ThoriumMod.ThoriumWorld.downedBat; }
+            get { return (bool) ThoriumMod.Call("GetDownedBoss", "Viscount"); }
         }
         public bool ThoriumModDownedBoreanStrider
         {
-            get { return ThoriumMod.ThoriumWorld.downedStrider; }
+            get { return (bool) ThoriumMod.Call("GetDownedBoss", "BoreanStrider"); }
         }
         public bool ThoriumModDownedFallenBeholder
         {
-            get { return ThoriumMod.ThoriumWorld.downedFallenBeholder; }
+            get { return (bool) ThoriumMod.Call("GetDownedBoss", "FallenBeholder"); }
         }
         public bool ThoriumModDownedAbyssion
         {
-            get { return ThoriumMod.ThoriumWorld.downedDepthBoss; }
+            get { return (bool) ThoriumMod.Call("GetDownedBoss", "ForgottenOne"); }
         }
-        */
 
         public override void SetupShop(Chest shop, ref int nextSlot)
         {
@@ -741,9 +738,8 @@ namespace AlchemistNPCLite.NPCs
                 shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Misc.BoomBox>());
                 shop.item[nextSlot].shopCustomPrice = 250000;
                 nextSlot++;
-                // IMPLEMENT WHEN WEAKREFERENCES FIXED
-                /*
-                if (ModLoader.GetMod("ThoriumMod") != null)
+                ModLoader.TryGetMod("ThoriumMod", out ThoriumMod);
+                if (ThoriumMod != null)
                 {
                     if (ThoriumModDownedGTBird)
                     {
@@ -766,7 +762,6 @@ namespace AlchemistNPCLite.NPCs
                         addModItemToShop(ThoriumMod, "DepthsMusicBox", 150000, ref shop, ref nextSlot);
                     }
                 }
-				*/
             }
         }
         private void addModItemToShop(Mod mod, String itemName, int price, ref Chest shop, ref int nextSlot) {

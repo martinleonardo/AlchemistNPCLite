@@ -66,6 +66,7 @@ namespace AlchemistNPCLite
 		public bool AmmoBox = false;
 		public bool SugarRush = false;
 		public bool Lamps = false;
+		private Mod ThoriumMod;
 
         public override void ResetEffects()
         {
@@ -122,6 +123,7 @@ namespace AlchemistNPCLite
         public override void UpdateEquips()
         {
             ModLoader.TryGetMod("CalamityMod", out Mod Calamity);
+			ModLoader.TryGetMod("ThoriumMod", out ThoriumMod);
 			if(Calamity != null)
 			{
                 Calamity.TryFind<ModBuff>("HolyWrathBuff", out ModBuff buff);
@@ -133,12 +135,13 @@ namespace AlchemistNPCLite
 					Player.GetCritChance(DamageClass.Ranged) += 10;
 					Player.GetCritChance(DamageClass.Magic) += 10;
 					Player.GetCritChance(DamageClass.Throwing) += 10;
-                    // IMPLEMENT WHEN WEAKREFERENCES FIXED
-                    /*
-					if (ModLoader.GetMod("ThoriumMod") != null)
+
+					if (ThoriumMod != null)
 					{
 						ThoriumBoosts(Player);
 					}
+					// IMPLEMENT WHEN WEAKREFERENCES FIXED
+                    /*
 					if (ModLoader.GetMod("Redemption") != null)
 					{
 						RedemptionBoost(Player);
@@ -164,12 +167,13 @@ namespace AlchemistNPCLite
                     Player.GetCritChance(DamageClass.Ranged) += 10;
                     Player.GetCritChance(DamageClass.Magic) += 10;
                     Player.GetCritChance(DamageClass.Throwing) += 10;
-                    // IMPLEMENT WHEN WEAKREFERENCES FIXED
-                    /*
-                    if (ModLoader.GetMod("ThoriumMod") != null)
+
+                    if (ThoriumMod != null)
                     {
                         ThoriumBoosts(Player);
                     }
+                    // IMPLEMENT WHEN WEAKREFERENCES FIXED
+                    /*
                     if (ModLoader.GetMod("Redemption") != null)
                     {
                         RedemptionBoost(Player);
@@ -226,13 +230,13 @@ namespace AlchemistNPCLite
             Redemption.Items.DruidDamageClass.DruidDamagePlayer RedemptionPlayer = Player.GetModPlayer<Redemption.Items.DruidDamageClass.DruidDamagePlayer>();
             RedemptionPlayer.druidCrit += 10;
         }
+		*/
         private void ThoriumBoosts(Player player)
         {
-            ThoriumMod.ThoriumPlayer ThoriumPlayer = Player.GetModPlayer<ThoriumMod.ThoriumPlayer>();
-            ThoriumPlayer.symphonicCrit += 10;
-            ThoriumPlayer.radiantCrit += 10;
+			ModLoader.TryGetMod("ThoriumMod", out Mod ThoriumMod);
+            ThoriumMod.Call("BonusBardCrit", player, 10);
+            ThoriumMod.Call("BonusHealerCrit", player, 10);
         }
-		*/
 		
 		private bool QuickBuff_ShouldBotherUsingThisBuff(int attemptedType)
 		{

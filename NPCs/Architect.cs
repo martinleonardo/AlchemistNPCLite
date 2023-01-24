@@ -611,16 +611,14 @@ namespace AlchemistNPCLite.NPCs
                 shop.item[nextSlot].SetDefaults(ItemID.RichMahogany);
                 shop.item[nextSlot].shopCustomPrice = 15;
                 nextSlot++;
-                // IMPLEMENT WHEN WEAKREFERENCES FIXED
-				/*
-                if (ModLoader.GetMod("ThoriumMod") != null)
+                ModLoader.TryGetMod("ThoriumMod", out Mod ThoriumMod);
+                if (ThoriumMod != null)
                 {
                     if (NPC.downedGoblins)
                     {
                     	addModItemToShop(ThoriumMod, "YewWood", 500, ref shop, ref nextSlot);
                     }
                 }
-				*/
                 shop.item[nextSlot].SetDefaults(ItemID.DynastyWood);
                 shop.item[nextSlot].shopCustomPrice = 100;
                 nextSlot++;
@@ -1520,6 +1518,13 @@ namespace AlchemistNPCLite.NPCs
                     shop.item[nextSlot].shopCustomPrice = 500;
                     nextSlot++;
                 }
+            }
+        }
+        private void addModItemToShop(Mod mod, String itemName, int price, ref Chest shop, ref int nextSlot) {
+            if(mod.TryFind<ModItem>(itemName, out ModItem currItem)) {
+                shop.item[nextSlot].SetDefaults(currItem.Type);
+                shop.item[nextSlot].shopCustomPrice = price;
+                nextSlot++;
             }
         }
     }

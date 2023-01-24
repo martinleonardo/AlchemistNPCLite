@@ -24,6 +24,7 @@ namespace AlchemistNPCLite.NPCs
         public static bool Shop4 = false;
         public static bool Shop5 = false;
         public static bool Shop6 = false;
+        private Mod ThoriumMod;
         public override string Texture
         {
             get
@@ -501,9 +502,8 @@ namespace AlchemistNPCLite.NPCs
             		return EntryO18;
             	} 
             }
-            // IMPLEMENT WHEN WEAKREFERENCES FIXED
-            /*
-            if (ModLoader.GetMod("ThoriumMod") != null)
+            ModLoader.TryGetMod("ThoriumMod", out ThoriumMod);
+            if (ThoriumMod != null)
             {
             	if (Main.rand.Next(6) == 0)
             	{
@@ -511,14 +511,13 @@ namespace AlchemistNPCLite.NPCs
 
             	} 
             }
-            if (ModLoader.GetMod("ThoriumMod") != null && Main.hardMode)
+            if (ThoriumMod != null && Main.hardMode)
             {
             	if (Main.rand.Next(6) == 0)
             	{
             	return EntryO6;
             	}
             }
-            */
             if (Main.rand.Next(5) == 0 && Main.hardMode)
             {
                 switch (Main.rand.Next(2))
@@ -564,9 +563,8 @@ namespace AlchemistNPCLite.NPCs
                     return EntryO33;
                 }
             }
-            // IMPLEMENT WHEN WEAKREFERENCES FIXED
-            /*
-            if (ModLoader.GetMod("ThoriumMod") != null && Main.hardMode)
+            ModLoader.TryGetMod("ThoriumMod", out ThoriumMod);
+            if (ThoriumMod != null && Main.hardMode)
             {
                 if (Main.rand.Next(5) == 0 && ThoriumModDownedFallenBeholder)
                 {
@@ -578,6 +576,8 @@ namespace AlchemistNPCLite.NPCs
                 }
             }
 
+            // IMPLEMENT WHEN WEAKREFERENCES FIXED
+            /*
             if (ModLoader.GetMod("SacredTools") != null && Main.hardMode)
             {
                 if (Main.rand.Next(5) == 0 && SacredToolsDownedAbbadon)
@@ -698,53 +698,53 @@ namespace AlchemistNPCLite.NPCs
                 }
             }
         }
-        // IMPLEMENT WHEN WEAKREFERENCES FIXED
-        /*
         public bool ThoriumModDownedGTBird
         {
-            get { return ThoriumMod.ThoriumWorld.downedThunderBird; }
+            get { return (bool) ThoriumMod.Call("GetDownedBoss", "TheGrandThunderBird"); }
         }
         public bool ThoriumModDownedQueenJelly
         {
-            get { return ThoriumMod.ThoriumWorld.downedJelly; }
+            get { return (bool) ThoriumMod.Call("GetDownedBoss", "QueenJellyfish"); }
         }
         public bool ThoriumModDownedViscount
         {
-            get { return ThoriumMod.ThoriumWorld.downedBat; }
+            get { return (bool) ThoriumMod.Call("GetDownedBoss", "Viscount"); }
         }
         public bool ThoriumModDownedStorm
         {
-            get { return ThoriumMod.ThoriumWorld.downedStorm; }
+            get { return (bool) ThoriumMod.Call("GetDownedBoss", "GraniteEnergyStorm"); }
         }
         public bool ThoriumModDownedChampion
         {
-            get { return ThoriumMod.ThoriumWorld.downedChampion; }
+            get { return (bool) ThoriumMod.Call("GetDownedBoss", "BuriedChampion"); }
         }
         public bool ThoriumModDownedStarScout
         {
-            get { return ThoriumMod.ThoriumWorld.downedScout; }
+            get { return (bool) ThoriumMod.Call("GetDownedBoss", "StarScouter"); }
         }
         public bool ThoriumModDownedBoreanStrider
         {
-            get { return ThoriumMod.ThoriumWorld.downedStrider; }
+            get { return (bool) ThoriumMod.Call("GetDownedBoss", "BoreanStrider"); }
         }
         public bool ThoriumModDownedFallenBeholder
         {
-            get { return ThoriumMod.ThoriumWorld.downedFallenBeholder; }
+            get { return (bool) ThoriumMod.Call("GetDownedBoss", "FallenBeholder"); }
         }
         public bool ThoriumModDownedLich
         {
-            get { return ThoriumMod.ThoriumWorld.downedLich; }
+            get { return (bool) ThoriumMod.Call("GetDownedBoss", "Lich"); }
         }
         public bool ThoriumModDownedAbyssion
         {
-            get { return ThoriumMod.ThoriumWorld.downedDepthBoss; }
+            get { return (bool) ThoriumMod.Call("GetDownedBoss", "ForgottenOne"); }
         }
         public bool ThoriumModDownedRagnarok
         {
-            get { return ThoriumMod.ThoriumWorld.downedRealityBreaker; }
+            get { return (bool) ThoriumMod.Call("GetDownedBoss", "ThePrimordials"); }
         }
 
+        // IMPLEMENT WHEN WEAKREFERENCES FIXED
+        /*
         public bool SacredToolsDownedDecree
         {
             get { return SacredTools.ModdedWorld.downedDecree; }
@@ -1163,9 +1163,8 @@ namespace AlchemistNPCLite.NPCs
             }
             if (Shop2)
             {
-                // IMPLEMENT WHEN WEAKREFERENCES FIXED
-                /*
-                if (ModLoader.GetMod("ThoriumMod") != null)
+                ModLoader.TryGetMod("ThoriumMod", out ThoriumMod);
+                if (ThoriumMod != null)
                 {
                 	addModItemToShop(ThoriumMod, "Petal", 10000, ref shop, ref nextSlot);
                 	if (NPC.downedMoonlord)
@@ -1179,6 +1178,8 @@ namespace AlchemistNPCLite.NPCs
                 		addModItemToShop(ThoriumMod, "BrokenHeroFragment", 250000, ref shop, ref nextSlot);
                 	}
                 }
+                // IMPLEMENT WHEN WEAKREFERENCES FIXED
+                /*
                 if (ModLoader.GetMod("SpiritMod") != null)
                 {
                 	if (NPC.downedGolemBoss)
@@ -1319,16 +1320,14 @@ namespace AlchemistNPCLite.NPCs
                         nextSlot++;
                     }
                 }
-                // IMPLEMENT WHEN WEAKREFERENCES FIXED
-                /*
-                if (ModLoader.GetMod("ThoriumMod") != null)
+                ModLoader.TryGetMod("ThoriumMod", out ThoriumMod);
+                if (ThoriumMod != null)
 				{
 					if (DD2Event.DownedInvasionT1)
 					{
 						addModItemToShop(ThoriumMod, "DarkMageBag", 1000000, ref shop, ref nextSlot);
 					}
 				}
-				*/
                 if (Main.hardMode && Main.expertMode)
                 {
                     shop.item[nextSlot].SetDefaults(ItemID.WallOfFleshBossBag);
@@ -1353,16 +1352,14 @@ namespace AlchemistNPCLite.NPCs
                     shop.item[nextSlot].shopCustomPrice = 2000000;
                     nextSlot++;
                 }
-                // IMPLEMENT WHEN WEAKREFERENCES FIXED
-                /*
-                if (ModLoader.GetMod("ThoriumMod") != null)
+                ModLoader.TryGetMod("ThoriumMod", out ThoriumMod);
+                if (ThoriumMod != null)
 				{
 					if (DD2Event.DownedInvasionT2 && NPC.downedMechBossAny)
 					{
 						addModItemToShop(ThoriumMod, "OgreBag", 2500000, ref shop, ref nextSlot);
 					}
 				}
-				*/
                 if (NPC.downedPlantBoss && Main.expertMode)
                 {
                     shop.item[nextSlot].SetDefaults(ItemID.PlanteraBossBag);
@@ -1514,9 +1511,9 @@ namespace AlchemistNPCLite.NPCs
                         }
                     }
                 }
-                // IMPLEMENT WHEN WEAKREFERENCES FIXED
-                /*
-                if (ModLoader.GetMod("ThoriumMod") != null)
+
+                ModLoader.TryGetMod("ThoriumMod", out ThoriumMod);
+                if (ThoriumMod != null)
                 {
                     if (NPC.downedBoss3)
                     {
@@ -1572,7 +1569,8 @@ namespace AlchemistNPCLite.NPCs
                         }
                     }
                 }
-
+                // IMPLEMENT WHEN WEAKREFERENCES FIXED
+                /*
                 if (ModLoader.GetMod("SacredTools") != null)
                 {
                     if (NPC.downedBoss3)

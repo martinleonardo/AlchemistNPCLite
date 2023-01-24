@@ -29,6 +29,7 @@ namespace AlchemistNPCLite.NPCs
         public static bool TN7 = false;
         public static bool TN8 = false;
         public static bool TN9 = false;
+        private Mod ThoriumMod;
         public override string Texture
         {
             get
@@ -258,9 +259,8 @@ namespace AlchemistNPCLite.NPCs
             {
                 return EntryJ8 + Main.npc[Merchant].GivenName + EntryJ9;
             }
-			// IMPLEMENT WHEN WEAKREFERENCES FIXED
-			/*
-            if (ModLoader.GetMod("ThoriumMod") != null)
+            ModLoader.TryGetMod("ThoriumMod", out ThoriumMod);
+            if (ThoriumMod != null)
             {
             	switch (Main.rand.Next(2))
             	{
@@ -270,7 +270,6 @@ namespace AlchemistNPCLite.NPCs
 					return EntryJ6;
             	}
             } 
-			*/
             switch (Main.rand.Next(6))
             {
                 case 0:
@@ -335,14 +334,12 @@ namespace AlchemistNPCLite.NPCs
                     shop.item[nextSlot].SetDefaults(ItemID.FossilOre);
                     shop.item[nextSlot].shopCustomPrice = 5000;
                     nextSlot++;
-					// IMPLEMENT WHEN WEAKREFERENCES FIXED
-					/*
-                    if (ModLoader.GetMod("ThoriumMod") != null)
+                    ModLoader.TryGetMod("ThoriumMod", out ThoriumMod);
+                    if (ThoriumMod != null)
                     {
                     	addModItemToShop(ThoriumMod, "Opal", 5000, ref shop, ref nextSlot);
                     	addModItemToShop(ThoriumMod, "Onyx", 5000, ref shop, ref nextSlot);	
                     }
-					*/
                     shop.item[nextSlot].SetDefaults(ItemID.BandofStarpower);
                     shop.item[nextSlot].shopCustomPrice = 30000;
                     nextSlot++;
@@ -392,11 +389,15 @@ namespace AlchemistNPCLite.NPCs
                             addModItemToShop(Tremor, "LapisLazuli", 150000, ref shop, ref nextSlot);
                         }
                     }
-                    if (ModLoader.GetMod("ThoriumMod") != null)
+                    */
+                    ModLoader.TryGetMod("ThoriumMod", out ThoriumMod);
+                    if (ThoriumMod != null)
                     {
                         addModItemToShop(ThoriumMod, "GraniteEnergyCore", 10000, ref shop, ref nextSlot);
                         addModItemToShop(ThoriumMod, "BronzeFragments", 10000, ref shop, ref nextSlot);
                     }
+                    // IMPLEMENT WHEN WEAKREFERENCES FIXED
+                    /*
                     if (ModLoader.GetMod("SpiritMod") != null)
                     {
                         addModItemToShop(SpiritMod, "GraniteChunk", 10000, ref shop, ref nextSlot);
@@ -433,13 +434,11 @@ namespace AlchemistNPCLite.NPCs
                 nextSlot++;
                 if (NPC.downedBoss2)
                 {
-                    // IMPLEMENT WHEN WEAKREFERENCES FIXED
-					/*
-                    if (ModLoader.GetMod("ThoriumMod") != null)
+                    ModLoader.TryGetMod("ThoriumMod", out ThoriumMod);
+                    if (ThoriumMod != null)
                     {
                         addModItemToShop(ThoriumMod, "Mistletoe", 50000, ref shop, ref nextSlot);
                     }
-					*/
 					shop.item[nextSlot].SetDefaults(ItemID.SliceOfCake);
                     shop.item[nextSlot].shopCustomPrice = 100000;
                     nextSlot++;

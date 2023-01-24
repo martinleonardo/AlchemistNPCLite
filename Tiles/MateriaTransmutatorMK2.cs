@@ -72,15 +72,20 @@ namespace AlchemistNPCLite.Tiles
                 TileID.AlchemyTable,
                 TileID.LunarCraftingStation
             };
-            // IMPLEMENT WHEN WEAKREFERENCES FIXED
-			/*
-            if (ModLoader.GetMod("ThoriumMod") != null)
+            ModLoader.TryGetMod("ThoriumMod", out Mod ThoriumMod);
+			if (ThoriumMod != null)
             {
-                Array.Resize(ref adjTiles, adjTiles.Length + 3);
-                adjTiles[adjTiles.Length - 1] = ModLoader.GetMod("ThoriumMod").TileType("ThoriumAnvil");
-                adjTiles[adjTiles.Length - 2] = ModLoader.GetMod("ThoriumMod").TileType("ArcaneArmorFabricator");
-                adjTiles[adjTiles.Length - 3] = ModLoader.GetMod("ThoriumMod").TileType("SoulForge");
+                Array.Resize(ref tempTiles, AdjTiles.Length + 3);
+                AdjTiles = tempTiles;
+                if (ThoriumMod.TryFind<ModTile>("ThoriumAnvil", out ModTile mtile))
+                    AdjTiles[AdjTiles.Length - 1] = mtile.Type;
+                if (ThoriumMod.TryFind<ModTile>("ArcaneArmorFabricator", out mtile))
+                    AdjTiles[AdjTiles.Length - 1] = mtile.Type;
+                if (ThoriumMod.TryFind<ModTile>("SoulForge", out mtile))
+                    AdjTiles[AdjTiles.Length - 1] = mtile.Type;
             }
+            // IMPLEMENT WHEN WEAKREFERENCES FIXED
+			/*            
             if (ModLoader.GetMod("FargowiltasSouls") != null)
             {
                 Array.Resize(ref adjTiles, adjTiles.Length + 1);

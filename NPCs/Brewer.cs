@@ -752,9 +752,8 @@ namespace AlchemistNPCLite.NPCs
             }
             if (Shop21)
             {
-                // IMPLEMENT WHEN WEAKREFERENCES FIXED
-                /*
-                if (ModLoader.GetMod("ThoriumMod") != null)
+                ModLoader.TryGetMod("ThoriumMod", out Mod ThoriumMod);
+                if (ThoriumMod != null)
                 {
                 	if (NPC.downedBoss3)
                 	{
@@ -779,6 +778,8 @@ namespace AlchemistNPCLite.NPCs
                 	addModItemToShop(ThoriumMod, "AquaPotion", 10000, ref shop, ref nextSlot);
                 	addModItemToShop(ThoriumMod, "FrenzyPotion", 20000, ref shop, ref nextSlot);
                 }
+                // IMPLEMENT WHEN WEAKREFERENCES FIXED
+                /*
                 if (ModLoader.GetMod("ReducedGrinding") != null)
                 {
                 	addModItemToShop(ReducedGrinding, "War_Potion", 15000, ref shop, ref nextSlot);

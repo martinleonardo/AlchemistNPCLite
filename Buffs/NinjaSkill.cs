@@ -5,6 +5,9 @@ using static Terraria.ModLoader.ModContent;
 using Terraria.Localization;
 using Terraria.ID;
 
+using Terraria.Chat;
+using Microsoft.Xna.Framework;
+
 namespace AlchemistNPCLite.Buffs
 {
     public class NinjaSkill : ModBuff
@@ -30,12 +33,13 @@ namespace AlchemistNPCLite.Buffs
             player.GetCritChance(DamageClass.Throwing) += 5;
             player.blackBelt = true;
             player.spikedBoots = 2;
-            // IMPLEMENT WHEN WEAKREFERENCES FIXED
-            /*
-            if (ModLoader.GetMod("ThoriumMod") != null)
+            ModLoader.TryGetMod("ThoriumMod", out ThoriumMod);
+            if (ThoriumMod != null)
             {
                 ThoriumBoosts(player);
             }
+            // IMPLEMENT WHEN WEAKREFERENCES FIXED
+            /*
             if (ModLoader.GetMod("Redemption") != null)
             {
                 RedemptionBoost(player);
@@ -64,13 +68,13 @@ namespace AlchemistNPCLite.Buffs
         }
         private readonly Mod Redemption = ModLoader.GetMod("Redemption");
 
+		*/
         private void ThoriumBoosts(Player player)
         {
-            ThoriumMod.ThoriumPlayer ThoriumPlayer = player.GetModPlayer<ThoriumMod.ThoriumPlayer>();
-            Thoriumplayer.GetDamage(DamageClass.symphonic) += 5;
-            Thoriumplayer.GetDamage(DamageClass.radiant) += 5;
+            ModLoader.TryGetMod("ThoriumMod", out ThoriumMod);
+            ThoriumMod.Call("BonusBardDamageFlat", player, 5);
+            ThoriumMod.Call("BonusHealerDamageFlat", player, 5);
         }
-        private readonly Mod Thorium = ModLoader.GetMod("ThoriumMod");
-		*/
+        private Mod ThoriumMod;
     }
 }

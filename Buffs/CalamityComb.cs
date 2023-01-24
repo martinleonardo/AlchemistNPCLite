@@ -9,6 +9,7 @@ namespace AlchemistNPCLite.Buffs
 {
     public class CalamityComb : ModBuff
     {
+		private Mod ThoriumMod;
         private string[] BuffList = {
                 "CadancesGrace",
                 "YharimPower",
@@ -45,12 +46,13 @@ namespace AlchemistNPCLite.Buffs
                 if (Calamity.TryFind<ModBuff>(BuffString, out ModBuff buff))
                     player.buffImmune[buff.Type] = true;
             }
-            // IMPLEMENT WHEN WEAKREFERENCES FIXED
-            /*
-			if (ModLoader.GetMod("ThoriumMod") != null)
+            ModLoader.TryGetMod("ThoriumMod", out ThoriumMod);
+			if (ThoriumMod != null)
 			{
 				ThoriumBoosts(player);
 			}
+            // IMPLEMENT WHEN WEAKREFERENCES FIXED
+            /*
 			if (ModLoader.GetMod("Redemption") != null)
 			{
 				RedemptionBoost(player);
@@ -80,12 +82,12 @@ namespace AlchemistNPCLite.Buffs
 			Redemption.Items.DruidDamageClass.DruidDamagePlayer RedemptionPlayer = player.GetModPlayer<Redemption.Items.DruidDamageClass.DruidDamagePlayer>();
             Redemptionplayer.GetDamage(DamageClass.druid) += 2;
         }
+		*/
 		private void ThoriumBoosts(Player player)
         {
-            ThoriumMod.ThoriumPlayer ThoriumPlayer = player.GetModPlayer<ThoriumMod.ThoriumPlayer>();
-            Thoriumplayer.GetDamage(DamageClass.symphonic) += 2;
-            Thoriumplayer.GetDamage(DamageClass.radiant) += 2;
+            ModLoader.TryGetMod("ThoriumMod", out ThoriumMod);
+            ThoriumMod.Call("BonusBardDamageFlat", player, 2);
+            ThoriumMod.Call("BonusHealerDamageFlat", player, 2);
         }
-		*/
     }
 }

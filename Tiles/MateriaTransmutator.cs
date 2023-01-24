@@ -34,60 +34,66 @@ namespace AlchemistNPCLite.Tiles
             TileID.Sets.DisableSmartCursor[Type] = true;
             AdjTiles = new int[]
             {
-            TileID.WorkBenches,
-            TileID.Anvils,
-            TileID.Furnaces,
-            TileID.Hellforge,
-            TileID.Bookcases,
-            TileID.Sinks,
-            TileID.Solidifier,
-            TileID.Blendomatic,
-            TileID.MeatGrinder,
-            TileID.Loom,
-            TileID.LivingLoom,
-            TileID.FleshCloningVat,
-            TileID.GlassKiln,
-            TileID.BoneWelder,
-            TileID.SteampunkBoiler,
-            TileID.Bottles,
-            TileID.LihzahrdFurnace,
-            TileID.ImbuingStation,
-            TileID.DyeVat,
-            TileID.Kegs,
-            TileID.HeavyWorkBench,
-            TileID.Tables,
-            TileID.Chairs,
-            TileID.CookingPots,
-            TileID.DemonAltar,
-            TileID.Sawmill,
-            TileID.CrystalBall,
-            TileID.AdamantiteForge,
-            TileID.MythrilAnvil,
-            TileID.TinkerersWorkbench,
-            TileID.Autohammer,
-            TileID.IceMachine,
-            TileID.SkyMill,
-            TileID.HoneyDispenser,
-            TileID.AlchemyTable,
-            TileID.LunarCraftingStation
+                TileID.WorkBenches,
+                TileID.Anvils,
+                TileID.Furnaces,
+                TileID.Hellforge,
+                TileID.Bookcases,
+                TileID.Sinks,
+                TileID.Solidifier,
+                TileID.Blendomatic,
+                TileID.MeatGrinder,
+                TileID.Loom,
+                TileID.LivingLoom,
+                TileID.FleshCloningVat,
+                TileID.GlassKiln,
+                TileID.BoneWelder,
+                TileID.SteampunkBoiler,
+                TileID.Bottles,
+                TileID.LihzahrdFurnace,
+                TileID.ImbuingStation,
+                TileID.DyeVat,
+                TileID.Kegs,
+                TileID.HeavyWorkBench,
+                TileID.Tables,
+                TileID.Chairs,
+                TileID.CookingPots,
+                TileID.DemonAltar,
+                TileID.Sawmill,
+                TileID.CrystalBall,
+                TileID.AdamantiteForge,
+                TileID.MythrilAnvil,
+                TileID.TinkerersWorkbench,
+                TileID.Autohammer,
+                TileID.IceMachine,
+                TileID.SkyMill,
+                TileID.HoneyDispenser,
+                TileID.AlchemyTable,
+                TileID.LunarCraftingStation
             };
+            int[] tempTiles = AdjTiles;
+            ModLoader.TryGetMod("ThoriumMod", out Mod ThoriumMod);
+			if (ThoriumMod != null)
+            {
+                Array.Resize(ref tempTiles, AdjTiles.Length + 3);
+                AdjTiles = tempTiles;
+                if (ThoriumMod.TryFind<ModTile>("ThoriumAnvil", out ModTile mtile))
+                    AdjTiles[AdjTiles.Length - 1] = mtile.Type;
+                if (ThoriumMod.TryFind<ModTile>("ArcaneArmorFabricator", out mtile))
+                    AdjTiles[AdjTiles.Length - 1] = mtile.Type;
+                if (ThoriumMod.TryFind<ModTile>("SoulForge", out mtile))
+                    AdjTiles[AdjTiles.Length - 1] = mtile.Type;
+            }
             // IMPLEMENT WHEN WEAKREFERENCES FIXED
             /*
-			if (ModLoader.GetMod("ThoriumMod") != null)
-				{
-                Array.Resize(ref AdjTiles, AdjTiles.Length + 3);
-                AdjTiles[AdjTiles.Length - 1] = ModLoader.GetMod("ThoriumMod").TileType("ThoriumAnvil");
-                AdjTiles[AdjTiles.Length - 2] = ModLoader.GetMod("ThoriumMod").TileType("ArcaneArmorFabricator");
-                AdjTiles[AdjTiles.Length - 3] = ModLoader.GetMod("ThoriumMod").TileType("SoulForge");
-				}
 			if (ModLoader.GetMod("FargowiltasSouls") != null)
 				{
 				Array.Resize(ref AdjTiles, AdjTiles.Length + 1);
                 AdjTiles[AdjTiles.Length - 1] = ModLoader.GetMod("FargowiltasSouls").TileType("CrucibleCosmosSheet");
 				}
+			*/
 			DustType = 111;
 			AnimationFrameHeight = 74;
-			*/
         }
 
         public override void NumDust(int i, int j, bool fail, ref int num)

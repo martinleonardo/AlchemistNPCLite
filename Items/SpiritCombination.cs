@@ -13,11 +13,11 @@ namespace AlchemistNPCLite.Items
 {
     public class SpiritCombination : ModItem
     {
-		//Possibly removed
-		// public override bool Autoload(ref string name)
-		// {
-		// return ModLoader.GetMod("SpiritMod") != null;
-		// }
+		// public override bool IsLoadingEnabled(Mod mod)
+        // {
+		// 	ModLoader.TryGetMod("SpiritMod", out SpiritMod);
+		// 	return SpiritMod != null;
+        // }
 		
 		public override void SetStaticDefaults()
 		{

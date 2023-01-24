@@ -667,89 +667,90 @@ namespace AlchemistNPCLite.Items
                     tooltips.Insert(1, line);
                 }
             }
-            // IMPLEMENT WHEN WEAKREFERENCES FIXED
-            /*
-            if (ModLoader.GetMod("ThoriumMod") != null)
+            ModLoader.TryGetMod("ThoriumMod", out Mod ThoriumMod);
+            if (ThoriumMod != null)
             {
-                if (item.type == (ModLoader.GetMod("ThoriumMod").ItemType("DarkMageBag")))
+                if (ThoriumMod.TryFind<ModItem>("DarkMageBag", out ModItem currItem) && item.type == currItem.Type)
                 {
                     TooltipLine line = new TooltipLine(Mod, "DarkMage", DarkMage);
                     line.OverrideColor = Color.LimeGreen;
                     tooltips.Insert(1, line);
                 }
-                if (item.type == (ModLoader.GetMod("ThoriumMod").ItemType("OgreBag")))
+                if (ThoriumMod.TryFind<ModItem>("OgreBag", out currItem) && item.type == currItem.Type)
                 {
                     TooltipLine line = new TooltipLine(Mod, "Ogre", Ogre);
                     line.OverrideColor = Color.LimeGreen;
                     tooltips.Insert(1, line);
                 }
-                if (item.type == (ModLoader.GetMod("ThoriumMod").ItemType("ThunderBirdBag")))
+                if (ThoriumMod.TryFind<ModItem>("ThunderBirdBag", out currItem) && item.type == currItem.Type)
                 {
                     TooltipLine line = new TooltipLine(Mod, "ThunderBird", ThunderBird);
                     line.OverrideColor = Color.LimeGreen;
                     tooltips.Insert(1, line);
                 }
-                if (item.type == (ModLoader.GetMod("ThoriumMod").ItemType("JellyFishBag")))
+                if (ThoriumMod.TryFind<ModItem>("JellyFishBag", out currItem) && item.type == currItem.Type)
                 {
                     TooltipLine line = new TooltipLine(Mod, "QueenJellyfish", QueenJellyfish);
                     line.OverrideColor = Color.LimeGreen;
                     tooltips.Insert(1, line);
                 }
-                if (item.type == (ModLoader.GetMod("ThoriumMod").ItemType("CountBag")))
+                if (ThoriumMod.TryFind<ModItem>("CountBag", out currItem) && item.type == currItem.Type)
                 {
                     TooltipLine line = new TooltipLine(Mod, "CountEcho", CountEcho);
                     line.OverrideColor = Color.LimeGreen;
                     tooltips.Insert(1, line);
                 }
-                if (item.type == (ModLoader.GetMod("ThoriumMod").ItemType("GraniteBag")))
+                if (ThoriumMod.TryFind<ModItem>("GraniteBag", out currItem) && item.type == currItem.Type)
                 {
                     TooltipLine line = new TooltipLine(Mod, "GraniteEnergyStorm", GraniteEnergyStorm);
                     line.OverrideColor = Color.LimeGreen;
                     tooltips.Insert(1, line);
                 }
-                if (item.type == (ModLoader.GetMod("ThoriumMod").ItemType("HeroBag")))
+                if (ThoriumMod.TryFind<ModItem>("HeroBag", out currItem) && item.type == currItem.Type)
                 {
                     TooltipLine line = new TooltipLine(Mod, "TheBuriedChampion", TheBuriedChampion);
                     line.OverrideColor = Color.LimeGreen;
                     tooltips.Insert(1, line);
                 }
-                if (item.type == (ModLoader.GetMod("ThoriumMod").ItemType("ScouterBag")))
+                if (ThoriumMod.TryFind<ModItem>("ScouterBag", out currItem) && item.type == currItem.Type)
                 {
                     TooltipLine line = new TooltipLine(Mod, "TheStarScouter", TheStarScouter);
                     line.OverrideColor = Color.LimeGreen;
                     tooltips.Insert(1, line);
                 }
-                if (item.type == (ModLoader.GetMod("ThoriumMod").ItemType("BoreanBag")))
+                if (ThoriumMod.TryFind<ModItem>("BoreanBag", out currItem) && item.type == currItem.Type)
                 {
                     TooltipLine line = new TooltipLine(Mod, "BoreanStrider", BoreanStrider);
                     line.OverrideColor = Color.LimeGreen;
                     tooltips.Insert(1, line);
                 }
-                if (item.type == (ModLoader.GetMod("ThoriumMod").ItemType("BeholderBag")))
+                if (ThoriumMod.TryFind<ModItem>("BeholderBag", out currItem) && item.type == currItem.Type)
                 {
                     TooltipLine line = new TooltipLine(Mod, "CoznixTheFallenBeholder", CoznixTheFallenBeholder);
                     line.OverrideColor = Color.LimeGreen;
                     tooltips.Insert(1, line);
                 }
-                if (item.type == (ModLoader.GetMod("ThoriumMod").ItemType("LichBag")))
+                if (ThoriumMod.TryFind<ModItem>("LichBag", out currItem) && item.type == currItem.Type)
                 {
                     TooltipLine line = new TooltipLine(Mod, "TheLich", TheLich);
                     line.OverrideColor = Color.LimeGreen;
                     tooltips.Insert(1, line);
                 }
-                if (item.type == (ModLoader.GetMod("ThoriumMod").ItemType("AbyssionBag")))
+                if (ThoriumMod.TryFind<ModItem>("AbyssionBag", out currItem) && item.type == currItem.Type)
                 {
                     TooltipLine line = new TooltipLine(Mod, "AbyssionTheForgottenOne", AbyssionTheForgottenOne);
                     line.OverrideColor = Color.LimeGreen;
                     tooltips.Insert(1, line);
                 }
-                if (item.type == (ModLoader.GetMod("ThoriumMod").ItemType("RagBag")))
+                if (ThoriumMod.TryFind<ModItem>("RagBag", out currItem) && item.type == currItem.Type)
                 {
                     TooltipLine line = new TooltipLine(Mod, "TheRagnarok", TheRagnarok);
                     line.OverrideColor = Color.LimeGreen;
                     tooltips.Insert(1, line);
                 }
             }
+            // IMPLEMENT WHEN WEAKREFERENCES FIXED
+            /*
             if (ModLoader.GetMod("AAMod") != null)
             {
                 if (item.type == (ModLoader.GetMod("AAMod").ItemType("MonarchBag")))

@@ -16,6 +16,7 @@ namespace AlchemistNPCLite.NPCs
     {
         public static bool Shop1 = true;
         public static bool Shop2 = false;
+        private Mod ThoriumMod;
         public override string Texture
         {
             get
@@ -331,9 +332,8 @@ namespace AlchemistNPCLite.NPCs
                     shop.item[nextSlot].shopCustomPrice = 100000;
                     nextSlot++;
                 }
-                // IMPLEMENT WHEN WEAKREFERENCES FIXED
-				/*
-                if (ModLoader.GetMod("ThoriumMod") != null)
+                ModLoader.TryGetMod("ThoriumMod", out ThoriumMod);
+                if (ThoriumMod != null)
                 {
                     if (NPC.downedMechBossAny)
                     {
@@ -342,7 +342,6 @@ namespace AlchemistNPCLite.NPCs
                         nextSlot++;
                     }
                 }
-                */
                 if (ModLoader.TryGetMod("CalamityMod", out Mod Calamity))
                 {
                     if (NPC.downedGolemBoss)
@@ -380,32 +379,30 @@ namespace AlchemistNPCLite.NPCs
                     nextSlot++;
                 }
 
-				// IMPLEMENT WHEN WEAKREFERENCES FIXED
-				/*
-                if (ModLoader.GetMod("ThoriumMod") != null)
+				ModLoader.TryGetMod("ThoriumMod", out ThoriumMod);
+                if (ThoriumMod != null)
                 {
                     if (NPC.downedBoss3)
                     {
-                        addModItemToShop(ThoriumMod, "FrostCoatingItem", 5000, ref shop, ref nextSlot);addModItemToShop(ThoriumMod, "FrostCoatingItem", 5000, ref shop, ref nextSlot);extSlot].shopCustomPrice =addModItemToShop(ThoriumMod, "FrostCoatingItem", 5000, ref shop, ref nextSlot);extSlot].SetDefaults(ModLoaddModItemToShop(ThoriumMod, "FrostCoatingItem", 5000, ref shop, ref nextSlot);addModItemToShop(ThoriumMod, "FrostCoatingItem", 5000, ref shop, ref nextSlot);extSlot].shopCustomPrice = 2500;
-                        nextSlot++;
-                        shop.item[nextSlot].SetDefaults(ModLoader.GetMod("ThoriumMod").ItemType("ToxicCoatingItem"));
-                        shop.item[nextSlot].shopCustomPrice = 2500;
-                        nextSlot++;
+                        addModItemToShop(ThoriumMod, "FrostCoatingItem", 5000, ref shop, ref nextSlot);
+                        addModItemToShop(ThoriumMod, "ExplosiveCoatingItem", 5000, ref shop, ref nextSlot);
+                        addModItemToShop(ThoriumMod, "GorganCoatingItem", 5000, ref shop, ref nextSlot);
+                        addModItemToShop(ThoriumMod, "SporeCoatingItem", 2500, ref shop, ref nextSlot);
+                        addModItemToShop(ThoriumMod, "ToxicCoatingItem", 2500, ref shop, ref nextSlot);
                     }
                     if (Main.hardMode)
                     {
-                        addModItemToShop(ThoriumMod, "GasContainer", 200, ref shop, ref nextSlot);addModItemToShop(ThoriumMod, "GasContainer", 200, ref shop, ref nextSlot);extSlot].shopCustomPrice =addModItemToShop(ThoriumMod, "GasContainer", 200, ref shop, ref nextSlot);extSlot].SetDefaults(ModLoaddModItemToShop(ThoriumMod, "GasContainer", 200, ref shop, ref nextSlot);addModItemToShop(ThoriumMod, "GasContainer", 200, ref shop, ref nextSlot);extSlot].shopCustomPrice = 250;
-                        nextSlot++;
-                        shop.item[nextSlot].SetDefaults(ModLoader.GetMod("ThoriumMod").ItemType("AphrodisiacVial"));
-                        shop.item[nextSlot].shopCustomPrice = 250;
-                        nextSlot++;
+                        addModItemToShop(ThoriumMod, "GasContainer", 200, ref shop, ref nextSlot);
+                        addModItemToShop(ThoriumMod, "CorrosionBeaker", 250, ref shop, ref nextSlot);
+                        addModItemToShop(ThoriumMod, "CombustionFlask", 250, ref shop, ref nextSlot);
+                        addModItemToShop(ThoriumMod, "NitrogenVial", 250, ref shop, ref nextSlot);
+                        addModItemToShop(ThoriumMod, "AphrodisiacVial", 2525000, ref shop, ref nextSlot);
                         if (NPC.downedPlantBoss)
                         {
                             addModItemToShop(ThoriumMod, "PlasmaVial", 350, ref shop, ref nextSlot);
                         }
                     }
                 }
-				*/
             }
             if (Shop2)
             {

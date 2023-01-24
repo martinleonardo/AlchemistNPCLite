@@ -13,11 +13,11 @@ namespace AlchemistNPCLite.Items
 {
     public class ThoriumCombination : ModItem
     {
-		//Probably Removed
-		// public override bool Autoload(ref string name)
-		// {
-		// return ModLoader.GetMod("ThoriumMod") != null;
-		// }
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+			ModLoader.TryGetMod("ThoriumMod", out Mod ThoriumMod);
+			return ThoriumMod != null;
+        }
 		
 		public override void SetStaticDefaults()
 		{
@@ -50,23 +50,30 @@ namespace AlchemistNPCLite.Items
             Item.buffTime = 52000;    //this is the buff duration        10 = 10 Second
         }
 		
-		// IMPLEMENT WHEN WEAKREFERENCES FIXED
-		/*
 		public override void AddRecipes()
 		{
-			Recipe recipe = Recipe.Create(Item.type);
-			recipe.AddIngredient((ModLoader.GetMod("ThoriumMod").ItemType("AssassinPotion")), 1);
-			recipe.AddIngredient((ModLoader.GetMod("ThoriumMod").ItemType("BloodPotion")), 1);
-			recipe.AddIngredient((ModLoader.GetMod("ThoriumMod").ItemType("FrenzyPotion")), 1);
-			recipe.AddIngredient((ModLoader.GetMod("ThoriumMod").ItemType("CreativityPotion")), 1);
-			recipe.AddIngredient((ModLoader.GetMod("ThoriumMod").ItemType("EarwormPotion")), 1);
-			recipe.AddIngredient((ModLoader.GetMod("ThoriumMod").ItemType("InspirationReachPotion")), 1);
-			recipe.AddIngredient((ModLoader.GetMod("ThoriumMod").ItemType("GlowingPotion")), 1);
-			recipe.AddIngredient((ModLoader.GetMod("ThoriumMod").ItemType("HolyPotion")), 1);
-			recipe.AddIngredient((ModLoader.GetMod("ThoriumMod").ItemType("HydrationPotion")), 1);
-			recipe.AddTile(TileID.AlchemyTable);
-			recipe.Register();
+            ModLoader.TryGetMod("ThoriumMod", out Mod ThoriumMod);
+            if (ThoriumMod != null) {
+                Recipe recipe = Recipe.Create(Item.type);;
+                recipe.AddTile(TileID.AlchemyTable);
+                string[][] modComponents = new string[][]{
+                    new string[] {"ThoriumMod", "AssassinPotion"},
+                    new string[] {"ThoriumMod", "BloodPotion"},
+                    new string[] {"ThoriumMod", "FrenzyPotion"},
+                    new string[] {"ThoriumMod", "CreativityPotion"},
+                    new string[] {"ThoriumMod", "EarwormPotion"},
+                    new string[] {"ThoriumMod", "InspirationReachPotion"},
+                    new string[] {"ThoriumMod", "GlowingPotion"},
+                    new string[] {"ThoriumMod", "HolyPotion"},
+                    new string[] {"ThoriumMod", "HydrationPotion"}
+                };
+                foreach (string[] arr in modComponents) {
+                    if (ModContent.TryFind<ModItem>(arr[0], arr[1], out ModItem currItem)) {
+                        recipe.AddIngredient(currItem, 1);
+                    }
+                }
+                recipe.Register();
+            }
 		}
-		*/
     }
 }

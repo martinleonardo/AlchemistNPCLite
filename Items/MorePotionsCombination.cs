@@ -13,11 +13,11 @@ namespace AlchemistNPCLite.Items
 {
     public class MorePotionsCombination : ModItem
     {
-		//Probably removed
-		// public override bool Autoload(ref string name)
-		// {
-		// return ModLoader.GetMod("MorePotions") != null;
-		// }
+		// public override bool IsLoadingEnabled(Mod mod)
+        // {
+		// 	ModLoader.TryGetMod("MorePotions", out MorePotions);
+		// 	return MorePotions != null;
+        // }
 		
 		public override void SetStaticDefaults()
 		{

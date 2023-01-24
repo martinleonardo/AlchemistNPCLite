@@ -52,15 +52,20 @@ namespace AlchemistNPCLite.Items.Placeable
 			recipe.AddIngredient(ItemID.FragmentNebula, 10);
 			recipe.AddIngredient(ItemID.FragmentVortex, 10);
 			recipe.AddIngredient(ItemID.FragmentStardust, 10);
-            // IMPLEMENT WHEN WEAKREFERENCES FIXED
-            /*
-			if (ModLoader.GetMod("ThoriumMod") != null)
+			ModLoader.TryGetMod("ThoriumMod", out Mod ThoriumMod);
+			if (ThoriumMod != null)
 			{
-				recipe.AddIngredient((ModLoader.GetMod("ThoriumMod").ItemType("ThoriumAnvil")));
-				recipe.AddIngredient((ModLoader.GetMod("ThoriumMod").ItemType("ArcaneArmorFabricator")));
-				recipe.AddIngredient((ModLoader.GetMod("ThoriumMod").ItemType("SoulForge")));
+				string[][] modComponents = new string[][]{
+					new string[] {"ThoriumMod", "ThoriumAnvil"},
+					new string[] {"ThoriumMod", "ArcaneArmorFabricator"},
+					new string[] {"ThoriumMod", "SoulForge"},
+            	};
+            	foreach (string[] arr in modComponents) {
+					if (ModContent.TryFind<ModItem>(arr[0], arr[1], out ModItem currItem)) {
+						recipe.AddIngredient(currItem, 1);
+                	}
+            	}
 			}
-			*/
 			recipe.Register();
 		}
 	}
